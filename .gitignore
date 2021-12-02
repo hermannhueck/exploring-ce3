@@ -1,0 +1,26 @@
+# directories
+target/
+out/
+
+# hidden directories
+.idea/
+.bloop/
+.bsp/
+.metals/
+.vscode/
+.ammonite/
+
+# files
+*.class
+*.log
+*.jar
+*.zip
+metals.sbt
+*.pdf
+package-lock.json
+
+# hidden files
+.history
+.sbthistory
+.dotty-ide*
+.DS_Store
