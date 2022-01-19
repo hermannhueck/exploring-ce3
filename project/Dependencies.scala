@@ -12,6 +12,7 @@ object Dependencies {
       // "org.typelevel" %% "cats-effect-kernel"   % catsEffectVersion,
       // standard "effect" library (Queues, Console, Random etc.)
       // "org.typelevel" %% "cats-effect-std"   % catsEffectVersion,
+      "org.typelevel" %% "cats-effect-testkit"   % catsEffectVersion % Test,
       "org.typelevel" %% "munit-cats-effect-3" % munitCe3Version % Test,
       "com.disneystreaming" %% "weaver-cats" % weaverCatsVersion % Test
     )
