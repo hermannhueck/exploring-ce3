@@ -2,7 +2,6 @@
 
 package ce3.test_runtime
 
-import cats._
 import cats.instances.list._
 import cats.syntax.traverse._
 import cats.effect.IO
@@ -56,7 +55,7 @@ class RetryTestSuite extends CatsEffectSuite {
                } yield ()
              }
 
-        _ <- control.results.assertEquals(Some(Outcome.errored[Id, Throwable, Int](TestException)))
+        _ <- control.results.assertEquals(Some(Outcome.errored[cats.Id, Throwable, Int](TestException)))
       } yield ()
     }
   }
