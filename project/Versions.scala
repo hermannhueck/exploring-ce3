@@ -4,12 +4,12 @@ object Versions {
   val projectVersion = "0.1.0"
 
   // Scala
-  val scala2Version = "2.13.7"
+  val scala2Version = "2.13.8"
 
   // 3rd party libraries
-  val catsEffectVersion = "3.3.0"
-  val munitCe3Version  = "1.0.6"
-  val weaverCatsVersion  = "0.7.7"
+  val catsEffectVersion = "3.3.4"
+  val munitCe3Version  = "1.0.7"
+  val weaverCatsVersion  = "0.7.9"
 
   // compiler plugins
   val kindProjectorVersion    = "0.13.2"
