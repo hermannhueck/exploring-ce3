@@ -24,10 +24,10 @@ object Ex12Semaphore extends IOApp.Simple {
 
   val run: IO[Unit] =
     for {
-      s  <- Semaphore[IO](1)
+      s <- Semaphore[IO](1)
       r1 = new PreciousResource[IO]("R1", s)
       r2 = new PreciousResource[IO]("R2", s)
       r3 = new PreciousResource[IO]("R3", s)
-      _  <- List(r1.use, r2.use, r3.use).parSequence.void
+      _ <- List(r1.use, r2.use, r3.use).parSequence.void
     } yield ()
 }

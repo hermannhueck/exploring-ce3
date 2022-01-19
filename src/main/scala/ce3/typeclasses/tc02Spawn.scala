@@ -16,16 +16,15 @@ object tc02Spawn {
     def close: F[Unit]
   }
 
-  def endpoint[F[_]: Spawn](
-      server: Server[F])(
+  def endpoint[F[_]: Spawn](server: Server[F])(
       body: Array[Byte] => F[Array[Byte]]
-      ): F[Unit] = {
+  ): F[Unit] = {
 
     def handle(conn: Connection[F]): F[Unit] =
       for {
-        request <- conn.read
+        request  <- conn.read
         response <- body(request)
-        _ <- conn.write(response)
+        _        <- conn.write(response)
       } yield ()
 
     val handler = MonadCancel[F] uncancelable { poll =>

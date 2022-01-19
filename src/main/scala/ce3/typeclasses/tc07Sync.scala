@@ -1,5 +1,3 @@
 package ce3.typeclasses
 
-object tc07Sync {
-  
-}
+object tc07Sync {}

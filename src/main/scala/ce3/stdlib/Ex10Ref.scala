@@ -1,6 +1,6 @@
 package ce3.stdlib
 
-import cats.effect.{IO, IOApp, Sync, Ref}
+import cats.effect.{IO, IOApp, Ref, Sync}
 import cats.syntax.all._
 
 object Ex10Ref extends IOApp.Simple {
@@ -21,13 +21,13 @@ object Ex10Ref extends IOApp.Simple {
   val run: IO[Unit] =
     for {
       ref <- Ref[IO].of(0)
-      w1  = new Worker[IO](1, ref)
-      w2  = new Worker[IO](2, ref)
-      w3  = new Worker[IO](3, ref)
+      w1   = new Worker[IO](1, ref)
+      w2   = new Worker[IO](2, ref)
+      w3   = new Worker[IO](3, ref)
       _   <- List(
-              w1.start,
-              w2.start,
-              w3.start
-            ).parSequence.void
+               w1.start,
+               w2.start,
+               w3.start
+             ).parSequence.void
     } yield ()
 }

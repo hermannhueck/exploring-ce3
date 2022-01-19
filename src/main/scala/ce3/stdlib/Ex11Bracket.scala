@@ -1,6 +1,6 @@
 package ce3.stdlib
 
-import cats.effect.{ExitCode, IO, IOApp, Sync, Ref}
+import cats.effect.{ExitCode, IO, IOApp, Ref, Sync}
 import cats.syntax.all._
 import cats.effect.ExitCode
 import java.io._
@@ -17,7 +17,7 @@ object Ex11Bracket extends IOApp {
     (openFileR(f1)).bracket { file1 =>
       (openFileR(f2)).bracket { file2 =>
         (openFileW(f3)).bracket { file3 =>
-            IO.blocking(file3.write(file1.readAllBytes ++ file2.readAllBytes))
+          IO.blocking(file3.write(file1.readAllBytes ++ file2.readAllBytes))
         }(file3 => IO.blocking(file3.close()))
       }(file2 => IO.blocking(file2.close()))
     }(file1 => IO.blocking(file1.close()))

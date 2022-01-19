@@ -1,5 +1,3 @@
 package ce3.typeclasses
 
-object tc03Unique {
-  
-}
+object tc03Unique {}

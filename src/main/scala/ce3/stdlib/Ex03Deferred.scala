@@ -1,6 +1,6 @@
 package ce3.stdlib
 
-import cats.effect.{IO, IOApp, Deferred}
+import cats.effect.{Deferred, IO, IOApp}
 import cats.syntax.all._
 
 object Ex03Deferred extends IOApp.Simple {

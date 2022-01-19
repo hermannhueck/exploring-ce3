@@ -7,21 +7,17 @@ import cats.syntax.all._
 
 object tc01MOnadCancel {
 
-  def guarded[F[_], R, A, E](
-    s: Semaphore[F],
-    alloc: F[R])(
-    use: R => F[A])(
-    release: R => F[Unit])(
-    implicit F: MonadCancel[F, E])
-    : F[A] =
-  F uncancelable { poll =>
-    for {
-      r <- alloc
+  def guarded[F[_], R, A, E](s: Semaphore[F], alloc: F[R])(
+      use: R => F[A]
+  )(release: R => F[Unit])(implicit F: MonadCancel[F, E]): F[A] =
+    F uncancelable { poll =>
+      for {
+        r <- alloc
 
-      _ <- poll(s.acquire).onCancel(release(r))
-      releaseAll = s.release >> release(r)
+        _         <- poll(s.acquire).onCancel(release(r))
+        releaseAll = s.release >> release(r)
 
-      a <- poll(use(r)).guarantee(releaseAll)
-    } yield a
-  }  
+        a <- poll(use(r)).guarantee(releaseAll)
+      } yield a
+    }
 }
