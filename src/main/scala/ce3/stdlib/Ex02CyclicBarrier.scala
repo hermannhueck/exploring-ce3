@@ -9,6 +9,7 @@ object Ex02CyclicBarrier extends IOApp.Simple {
 
   val run: IO[Unit] =
     for {
+      _  <- IO.println("-----------------------------------------------------")
       b  <- CyclicBarrier[IO](2)
       f1 <- (IO.println("fast fiber before barrier") >>
               b.await >>
@@ -19,6 +20,7 @@ object Ex02CyclicBarrier extends IOApp.Simple {
               b.await >>
               IO.println("slow fiber after barrier")).start
       _  <- (f1.join, f2.join).tupled
+      _  <- IO.println("-----------------------------------------------------")
     } yield ()
 
 }

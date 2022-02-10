@@ -20,6 +20,7 @@ object Ex10Ref extends IOApp.Simple {
 
   val run: IO[Unit] =
     for {
+      _   <- IO.println("-----------------------------------------------------")
       ref <- Ref[IO].of(0)
       w1   = new Worker[IO](1, ref)
       w2   = new Worker[IO](2, ref)
@@ -29,5 +30,6 @@ object Ex10Ref extends IOApp.Simple {
                w2.start,
                w3.start
              ).parSequence.void
+      _   <- IO.println("-----------------------------------------------------")
     } yield ()
 }

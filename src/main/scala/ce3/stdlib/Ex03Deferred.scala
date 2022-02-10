@@ -18,7 +18,9 @@ object Ex03Deferred extends IOApp.Simple {
 
   val run: IO[Unit] =
     for {
+      _ <- IO.println("-----------------------------------------------------")
       d <- Deferred[IO, Int]
       _ <- start(d)
+      _ <- IO.println("-----------------------------------------------------")
     } yield ()
 }

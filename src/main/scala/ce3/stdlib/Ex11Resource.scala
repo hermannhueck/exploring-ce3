@@ -29,9 +29,12 @@ object Ex11Resource extends IOApp {
       IO.blocking(out.write(in1.readAllBytes ++ in2.readAllBytes))
     }
 
-  def run(args: List[String]): IO[ExitCode] =
-    if (args.length != 3)
-      IO(println("Usage: Ex11Bracket <file1> <file2> <file3>")) *> IO.pure(ExitCode.Error)
-    else
-      concat(args(0), args(1), args(2)).as(ExitCode.Success)
+  def run(args: List[String]): IO[ExitCode] = for {
+    _        <- IO.println("-----------------------------------------------------")
+    exitCode <- if (args.length != 3)
+                  IO(println("Usage: Ex11Resource <file1> <file2> <file3>")) *> IO.pure(ExitCode.Error)
+                else
+                  concat(args(0), args(1), args(2)).as(ExitCode.Success)
+    _        <- IO.println("-----------------------------------------------------")
+  } yield exitCode
 }

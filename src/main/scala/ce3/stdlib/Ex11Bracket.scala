@@ -22,9 +22,12 @@ object Ex11Bracket extends IOApp {
       }(file2 => IO.blocking(file2.close()))
     }(file1 => IO.blocking(file1.close()))
 
-  def run(args: List[String]): IO[ExitCode] =
-    if (args.length != 3)
-      IO(println("Usage: Ex11Bracket <file1> <file2> <file3>")) *> IO.pure(ExitCode.Error)
-    else
-      concat(args(0), args(1), args(2)).as(ExitCode.Success)
+  def run(args: List[String]): IO[ExitCode] = for {
+    _        <- IO.println("-----------------------------------------------------")
+    exitCode <- if (args.length != 3)
+                  IO(println("Usage: Ex11Bracket <file1> <file2> <file3>")) *> IO.pure(ExitCode.Error)
+                else
+                  concat(args(0), args(1), args(2)).as(ExitCode.Success)
+    _        <- IO.println("-----------------------------------------------------")
+  } yield exitCode
 }
